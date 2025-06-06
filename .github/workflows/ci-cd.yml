@@ -68,7 +68,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.PRIVATE_REGISTRY_URL }}/your-namespace/your-image
+          images: ${{ secrets.PRIVATE_REGISTRY_URL }}guillaume/website
 
       - name: 🔧 Build & Push Docker image
         uses: docker/build-push-action@v5
