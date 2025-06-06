@@ -18,7 +18,7 @@ if (result && !result.error) {
     <div class='relative h-lvh' data-component='Index'>
       <h1 class='sr-only'>Présentation</h1>
       <div
-        class='pointer-events-none fixed right-0 bottom-0 left-0 mx-auto flex max-w-2xl flex-col gap-12 px-3 py-36 will-change-scroll'
+        class='noscript:visible invisible pointer-events-none fixed right-0 bottom-0 left-0 mx-auto flex max-w-2xl flex-col gap-12 px-3 py-36 will-change-scroll'
         data-zone='pinned'>
         <div class='flex flex-col gap-6 font-serif text-pretty'>
           <div
@@ -175,6 +175,7 @@ if (result && !result.error) {
           y: '-8.33%',
           filter: 'blur(4px)',
           opacity: 0.5,
+          autoAlpha: 0,
           duration: 1,
           ease: 'power2.out',
         })
