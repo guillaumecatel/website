@@ -11,18 +11,46 @@ if (result && !result.error) {
 
 <Layout>
   <Fragment slot='head'>
-    <Seo title='Hello world' description='Lorem ipsum' />
+    <Seo
+      title='Guillaume Catel ¬ Creative and front-end developer'
+      description={`
+        Creative and technically versatile front-end developer with a strong
+        background in software engineering and digital design. With solid
+        expertise in modern JavaScript frameworks, creative coding and UI/UX
+        design.
+      `}
+      jsonLd={{
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        'name': 'Guillaume Catel',
+        'url': 'https://guillaumecatel.com/',
+        // 'image': 'https://guillaumecatel.com/path-to-your-photo.jpg',
+        'jobTitle': 'Creative and front-end developer',
+        'description': `
+          Creative and technically versatile front-end developer with a strong
+          background in software engineering and digital design. With solid
+          expertise in modern JavaScript frameworks, creative coding and UI/UX
+          design.
+        `,
+        'email': 'mailto:hello@guillaumecatel.com',
+        'sameAs': [
+          'https://github.com/guillaumecatel',
+          'https://www.linkedin.com/in/guillaumecatel',
+          'https://www.instagram.com/guillaumecatel',
+        ],
+      }}
+    />
   </Fragment>
 
   <Fragment slot='body'>
     <div class='relative h-lvh' data-component='Index'>
       <h1 class='sr-only'>Présentation</h1>
       <div
-        class='noscript:visible invisible pointer-events-none fixed right-0 bottom-0 left-0 mx-auto flex max-w-2xl flex-col gap-12 px-3 py-36 will-change-scroll'
+        class='pointer-events-none invisible fixed right-0 bottom-0 left-0 mx-auto flex max-w-2xl flex-col gap-12 px-3 py-36 will-change-scroll noscript:visible'
         data-zone='pinned'>
         <div class='flex flex-col gap-6 font-serif text-pretty'>
           <div
-            class='noscript:visible invisible animate-text indent-6 text-lg will-change-contents'
+            class='animate-text invisible indent-6 text-lg will-change-contents noscript:visible'
             data-zone='section'
             aria-hidden='true'
             data-animation='split-text-blurred'>
@@ -36,7 +64,7 @@ if (result && !result.error) {
             design.
           </p>
           <div
-            class='noscript:visible invisible text-md animate-text px-[8.333%] pr-3 will-change-contents'
+            class='text-md animate-text invisible px-[8.333%] pr-3 will-change-contents noscript:visible'
             data-zone='section'
             aria-hidden='true'
             data-animation='split-text-blurred'>
@@ -59,13 +87,13 @@ if (result && !result.error) {
           <h2 class='sr-only'>Informations</h2>
           <div class='col-span-8 flex flex-col gap-3'>
             <h2
-              class='noscript:visible invisible font-sans text-xs font-medium uppercase'
+              class='invisible font-sans text-xs font-medium uppercase noscript:visible'
               data-animation='split-text-blurred'
               data-zone='section'>
               Services
             </h2>
             <ul
-              class='noscript:visible invisible flex flex-col gap-1.5 font-sans text-sm'
+              class='invisible flex flex-col gap-1.5 font-sans text-sm noscript:visible'
               data-zone='section'>
               <li data-animation='split-text-blurred'>
                 hello@guillaumecatel.com
@@ -73,7 +101,9 @@ if (result && !result.error) {
               <li data-animation='split-text-blurred'>Download my resume</li>
             </ul>
           </div>
-          <div class='noscript:visible invisible col-span-4 flex flex-col gap-3' data-zone='section'>
+          <div
+            class='invisible col-span-4 flex flex-col gap-3 noscript:visible'
+            data-zone='section'>
             <h2
               class='font-sans text-xs font-medium uppercase'
               data-animation='split-text-blurred'
