@@ -2,6 +2,8 @@ import node from '@astrojs/node'
 import playformCompress from '@playform/compress'
 import tailwindcss from '@tailwindcss/vite'
 import compressor from 'astro-compressor'
+import glsl from 'vite-plugin-glsl'
+
 import { defineConfig } from 'astro/config'
 
 export default defineConfig({
@@ -16,7 +18,7 @@ export default defineConfig({
     enabled: false,
   },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), glsl({ minify: true })],
   },
   experimental: {
     fonts: [
