@@ -34,19 +34,19 @@ export default defineConfig({
         ],
         variants: [
           // {
-          //   display: 'optional',
+          //   display: 'swap',
           //   weight: 700,
           //   style: 'normal',
           //   src: ['./src/assets/fonts/calendas_plus_bold-webfont.woff2'],
           // },
           // {
-          //   display: 'optional',
+          //   display: 'swap',
           //   weight: 400,
           //   style: 'italic',
           //   src: ['./src/assets/fonts/calendas_plus_italic-webfont.woff2'],
           // },
           {
-            display: 'optional',
+            display: 'swap',
             weight: 400,
             style: 'normal',
             src: ['./src/assets/fonts/calendas_plus-webfont.woff2'],
@@ -68,37 +68,37 @@ export default defineConfig({
         ],
         variants: [
           // {
-          //   display: 'optional',
+          //   display: 'swap',
           //   weight: 700,
           //   style: 'normal',
           //   src: ['./src/assets/fonts/basiersquare-bold-webfont.woff2'],
           // },
           // {
-          //   display: 'optional',
+          //   display: 'swap',
           //   weight: 700,
           //   style: 'italic',
           //   src: ['./src/assets/fonts/basiersquare-bolditalic-webfont.woff2'],
           // },
           {
-            display: 'optional',
+            display: 'swap',
             weight: 500,
             style: 'normal',
             src: ['./src/assets/fonts/basiersquare-medium-webfont.woff2'],
           },
           // {
-          //   display: 'optional',
+          //   display: 'swap',
           //   weight: 500,
           //   style: 'italic',
           //   src: ['./src/assets/fonts/basiersquare-mediumitalic-webfont.woff2'],
           // },
           {
-            display: 'optional',
+            display: 'swap',
             weight: 400,
             style: 'normal',
             src: ['./src/assets/fonts/basiersquare-regular-webfont.woff2'],
           },
           // {
-          //   display: 'optional',
+          //   display: 'swap',
           //   weight: 400,
           //   style: 'italic',
           //   src: [
@@ -106,13 +106,13 @@ export default defineConfig({
           //   ],
           // },
           // {
-          //   display: 'optional',
+          //   display: 'swap',
           //   weight: 600,
           //   style: 'normal',
           //   src: ['./src/assets/fonts/basiersquare-semibold-webfont.woff2'],
           // },
           // {
-          //   display: 'optional',
+          //   display: 'swap',
           //   weight: 600,
           //   style: 'italic',
           //   src: [
