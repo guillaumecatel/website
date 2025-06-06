@@ -22,7 +22,7 @@ if (result && !result.error) {
         data-zone='pinned'>
         <div class='flex flex-col gap-6 font-serif text-pretty'>
           <div
-            class='animate-text indent-6 text-lg will-change-contents'
+            class='noscript:visible invisible animate-text indent-6 text-lg will-change-contents'
             data-zone='section'
             aria-hidden='true'
             data-animation='split-text-blurred'>
@@ -36,7 +36,7 @@ if (result && !result.error) {
             design.
           </p>
           <div
-            class='text-md animate-text px-[8.333%] pr-3 will-change-contents'
+            class='noscript:visible invisible text-md animate-text px-[8.333%] pr-3 will-change-contents'
             data-zone='section'
             aria-hidden='true'
             data-animation='split-text-blurred'>
@@ -59,13 +59,13 @@ if (result && !result.error) {
           <h2 class='sr-only'>Informations</h2>
           <div class='col-span-8 flex flex-col gap-3'>
             <h2
-              class='font-sans text-xs font-medium uppercase'
+              class='noscript:visible invisible font-sans text-xs font-medium uppercase'
               data-animation='split-text-blurred'
               data-zone='section'>
               Services
             </h2>
             <ul
-              class='flex flex-col gap-1.5 font-sans text-sm'
+              class='noscript:visible invisible flex flex-col gap-1.5 font-sans text-sm'
               data-zone='section'>
               <li data-animation='split-text-blurred'>
                 hello@guillaumecatel.com
@@ -73,7 +73,7 @@ if (result && !result.error) {
               <li data-animation='split-text-blurred'>Download my resume</li>
             </ul>
           </div>
-          <div class='col-span-4 flex flex-col gap-3' data-zone='section'>
+          <div class='noscript:visible invisible col-span-4 flex flex-col gap-3' data-zone='section'>
             <h2
               class='font-sans text-xs font-medium uppercase'
               data-animation='split-text-blurred'
@@ -135,6 +135,7 @@ if (result && !result.error) {
           translateY: '50%',
           opacity: 0,
           duration: 0.4,
+          autoAlpha: 0,
           ease: 'power2.out',
           stagger: 0.2,
           //filter: 'blur(4px)',
@@ -147,6 +148,7 @@ if (result && !result.error) {
               duration: 0.7,
               //filter: 'blur(4px)',
               stagger: 0.02,
+
               ease: 'power2.out',
             },
             '<',

@@ -42,13 +42,13 @@ import Wrapper from '@/components/Wrapper.astro'
 
           gsap.fromTo(
             header,
-            { y: -100, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' },
+            { y: -100, opacity: 0, autoAlpha: 0 },
+            { y: 0, opacity: 1, duration: 0.5, autoAlpha: 1, ease: 'power2.out' },
           )
           gsap.fromTo(
             callToAction,
-            { y: 100, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.2 },
+            { y: 100, opacity: 0, autoAlpha: 0 },
+            { y: 0, opacity: 1, duration: 0.5, autoAlpha: 1, ease: 'power2.out', delay: 0.2 },
           )
 
           const footerObserver = new IntersectionObserver(
