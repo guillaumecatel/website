@@ -9,9 +9,14 @@ const BASE = '/'
 
 const app = express()
 
+app.disable('x-powered-by')
+
 app.use(compression())
 
-app.use(BASE, express.static('dist/client/'))
+app.use(BASE, express.static('dist/client/', {
+  maxAge: '1y',
+  immutable: true,
+}))
 
 app.use(
   helmet({
