@@ -1,0 +1,33 @@
+---
+
+---
+
+<button
+  class='text-md bg-accent-950 text-accent-400 fixed right-4 bottom-10 left-3 mx-auto h-12 max-w-2xl overflow-hidden rounded-full font-sans font-medium'
+  type='submit'
+  form='contact-form'
+  data-component='CallToAction'>
+  <span class='absolute top-0 right-0 left-0'>
+    <span class='flex h-12 items-center justify-center'>Drop me a line</span>
+    <span class='flex h-12 items-center justify-center' aria-hidden='true'>
+      Drop it like it's hot
+    </span>
+  </span>
+</button>
+
+<script>
+  const callToAction = document.querySelector(
+    '[data-component="CallToAction"]',
+  ) as HTMLButtonElement
+
+  const contactForm = document.querySelector(
+    '[data-component="ContactForm"]',
+  ) as HTMLFormElement
+
+  callToAction.addEventListener('click', (event) => {
+    if (callToAction.dataset.ready === 'false') {
+      event.preventDefault()
+      contactForm.scrollIntoView({ behavior: 'smooth' })
+    }
+  })
+</script>

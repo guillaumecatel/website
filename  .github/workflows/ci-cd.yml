@@ -1,0 +1,74 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    name: 🔍 Lint, Format & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: 📦 Install PNPM
+        run: corepack enable && corepack prepare pnpm@latest --activate
+
+      - name: 📥 Install dependencies
+        run: pnpm install
+
+      - name: 💅 Lint
+        run: pnpm lint
+
+      - name: 🧼 Format
+        run: pnpm format
+
+      - name: 🧪 Unit tests
+        run: pnpm test:unit
+
+      - name: 🚀 E2E tests
+        run: pnpm test:e2e
+
+  docker-build-and-push:
+    name: 🐳 Build & Push Docker image
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🔐 Log in to Private Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.PRIVATE_REGISTRY_URL }}
+          username: ${{ secrets.PRIVATE_REGISTRY_USERNAME }}
+          password: ${{ secrets.PRIVATE_REGISTRY_PASSWORD }}
+
+      - name: 📦 Extract metadata (tags, labels)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ secrets.PRIVATE_REGISTRY_URL }}/your-namespace/your-image
+
+      - name: 🔧 Build & Push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

@@ -1,22 +1,94 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import Background from '@/components/Background.astro'
+import Body from '@/components/Body.astro'
+import Content from '@/components/Content.astro'
+import Cursor from '@/components/Cursor.astro'
+import Document from '@/components/Document.astro'
+import Footer from '@/components/Footer.astro'
+import Head from '@/components/Head.astro'
+import Header from '@/components/Header.astro'
+import Html from '@/components/Html.astro'
+import Wrapper from '@/components/Wrapper.astro'
+---
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+<Document>
+  <Html>
+    <Head>
+      <slot name='head' />
+    </Head>
+    <Body>
+      <Wrapper>
+        <Header />
+        <Content>
+          <slot name='body' />
+        </Content>
+        <Footer />
+        <Cursor />
+        <Background server:defer />
+      </Wrapper>
+      <script>
+        import { gsap } from '@/utils'
+
+        document.addEventListener('DOMContentLoaded', () => {
+          const header = document.querySelector(
+            '[data-component="Header"]',
+          ) as HTMLElement
+          const callToAction = document.querySelector(
+            '[data-component="CallToAction"]',
+          ) as HTMLElement
+          const footer = document.querySelector(
+            '[data-component="Footer"]',
+          ) as HTMLElement
+
+          gsap.fromTo(
+            header,
+            { y: -100, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' },
+          )
+          gsap.fromTo(
+            callToAction,
+            { y: 100, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.2 },
+          )
+
+          const footerObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                flipLogo()
+                if (entry.isIntersecting) {
+                  revealCallToActionText('-50%')
+                  callToAction.dataset.ready = 'true'
+                } else {
+                  revealCallToActionText(0)
+                  callToAction.dataset.ready = 'false'
+                }
+              })
+            },
+            { threshold: 0.5 },
+          )
+
+          footerObserver.observe(footer)
+
+          const revealCallToActionText = (y: number | string) => {
+            const ctaText = callToAction.querySelector('span')
+            if (ctaText) {
+              gsap.to(ctaText, { translateY: y })
+            }
+          }
+
+          const flipLogo = () => {
+            const logo = document.querySelector('[data-component="Logo"]')
+            if (logo) {
+              gsap.set(logo, { rotationY: 0 })
+              gsap.to(logo, {
+                rotationY: 360,
+                duration: 0.8,
+                ease: 'power2.inOut',
+              })
+            }
+          }
+        })
+      </script>
+    </Body>
+  </Html>
+</Document>

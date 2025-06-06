@@ -1,48 +1,107 @@
-# Astro Starter Kit: Basics
+# 🌐 website-2025
 
-```sh
-pnpm create astro@latest -- --template basics
+**website-2025** is the 2025 edition of a modern web application powered by [Astro](https://astro.build), with a focus on performance, scalability, and expressive UI animation using GSAP and Three.js.
+It runs on an [Express](https://expressjs.com/) server with security middleware like Helmet and supports compression out of the box.
+
+---
+
+## 🚀 Features
+
+- ⚡ Built with **Astro 5**
+- 🧱 Runs on **Express** with Helmet + Compression
+- 💨 CSS with **TailwindCSS**
+- 🎞️ Animations via **GSAP**
+- 🌌 WebGL experiences powered by **Three.js**
+- 📦 Uses **pnpm** and `corepack`
+- 🐳 Built for **Docker** with minimal final image (`node:slim`)
+- 🧼 Linting & formatting with **ESLint** and **Prettier**
+
+---
+
+## 📦 Installation
+
+> This project uses **pnpm**. `npm` and `yarn` are explicitly disallowed.
+
+```bash
+pnpm install
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 📜 Scripts
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+| Script           | Description                            |
+|------------------|----------------------------------------|
+| `pnpm dev`     | Start the Astro development server     |
+| `pnpm build`   | Build the site for production          |
+| `pnpm start`   | Start the Express server (serves `dist/`) |
+| `pnpm lint`    | Fix lint issues using ESLint           |
+| `pnpm format`  | Format code with Prettier              |
+| `pnpm test:unit` | Run unit tests (placeholder)         |
+| `pnpm test:e2e`  | Run E2E tests (placeholder)          |
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🧪 Lint, Format & Test
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+These commands are meant to be run as part of CI:
+
+```bash
+pnpm lint
+pnpm format
+pnpm test:unit
+pnpm test:e2e
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+---
 
-## 🧞 Commands
+## 🐳 Docker
 
-All commands are run from the root of the project, from a terminal:
+This project is containerized with a multi-stage Dockerfile for optimal performance.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+### 🛠️ Build the Docker image
 
-## 👀 Want to learn more?
+```bash
+docker build -t website-2025 .
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### ▶️ Run the container
+
+```bash
+docker run -p 8000:8000 website-2025
+```
+
+> The site will be accessible at: [http://localhost:8000](http://localhost:8000)
+
+---
+
+## 🔁 CI/CD Pipeline (Recommended)
+
+This repository is designed to be used with a CI/CD pipeline that performs:
+
+1. ✅ Lint and format checks
+2. 🧪 Run tests (`test:unit`, `test:e2e`)
+3. 🏗️ Build the Docker image
+4. 📤 Push the image to Docker registry
+5. 🚀 Deploy on infrastructure
+
+---
+
+## 🗂 Project Structure
+
+```
+.
+├── public/           # Static assets
+├── src/              # Astro pages, components, styles
+├── server.mjs        # Express entry point
+├── Dockerfile
+├── astro.config.mjs
+├── package.json
+└── pnpm-lock.yaml
+```
+
+---
+
+## 📄 License
+
+MIT © Guillaume Catel

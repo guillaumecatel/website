@@ -1,0 +1,14 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+type Props = HTMLAttributes<'main'>
+
+const { ...attrs } = Astro.props
+---
+
+<main
+  class='min-h-lvh snap-start overflow-x-hidden'
+  data-component='Content'
+  {...attrs}>
+  <slot />
+</main>

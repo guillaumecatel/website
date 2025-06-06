@@ -1,11 +1,182 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Seo from '@/components/Seo.astro'
+import Layout from '@/layouts/Layout.astro'
+import { actions } from 'astro:actions'
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const result = Astro.getActionResult(actions.contact)
+if (result && !result.error) {
+  return Astro.redirect(`/#contact-form`)
+}
 ---
 
 <Layout>
-	<Welcome />
+  <Fragment slot='head'>
+    <Seo title='Hello world' description='Lorem ipsum' />
+  </Fragment>
+
+  <Fragment slot='body'>
+    <div class='relative h-lvh' data-component='Index'>
+      <h1 class='sr-only'>Présentation</h1>
+      <div
+        class='pointer-events-none fixed right-0 bottom-0 left-0 mx-auto flex max-w-2xl flex-col gap-12 px-3 py-36 will-change-scroll'
+        data-zone='pinned'>
+        <div class='flex flex-col gap-6 font-serif text-pretty'>
+          <div
+            class='animate-text indent-6 text-lg will-change-contents'
+            data-zone='section'
+            aria-hidden='true'
+            data-animation='split-text-blurred'>
+            Creative and technically versatile front-end developer with a solid
+            background in software engineering and digital design.
+          </div>
+          <p class='sr-only'>
+            Creative and technically versatile front-end developer with a strong
+            background in software engineering and digital design. With solid
+            expertise in modern JavaScript frameworks, creative coding and UI/UX
+            design.
+          </p>
+          <div
+            class='text-md animate-text px-[8.333%] pr-3 will-change-contents'
+            data-zone='section'
+            aria-hidden='true'
+            data-animation='split-text-blurred'>
+            I have strong expertise in modern JavaScript frameworks, creative
+            coding and UI/UX design. I thrive in both collaborative and
+            autonomous environments and bring a problem-solving mindset, strong
+            visual culture, and rigorous methodology to each project.
+          </div>
+          <p class='sr-only'>
+            “I thrive in both collaborative and autonomous environments and
+            bring a problem-solving mindset, strong visual culture, and rigorous
+            methodology to each project.”
+          </p>
+        </div>
+        <hr
+          class='border-accent-950/10 border-0 border-t'
+          data-zone='separator'
+        />
+        <section class='grid grid-cols-12 flex-col-reverse gap-3'>
+          <h2 class='sr-only'>Informations</h2>
+          <div class='col-span-8 flex flex-col gap-3'>
+            <h2
+              class='font-sans text-xs font-medium uppercase'
+              data-animation='split-text-blurred'
+              data-zone='section'>
+              Services
+            </h2>
+            <ul
+              class='flex flex-col gap-1.5 font-sans text-sm'
+              data-zone='section'>
+              <li data-animation='split-text-blurred'>
+                hello@guillaumecatel.com
+              </li>
+              <li data-animation='split-text-blurred'>Download my resume</li>
+            </ul>
+          </div>
+          <div class='col-span-4 flex flex-col gap-3' data-zone='section'>
+            <h2
+              class='font-sans text-xs font-medium uppercase'
+              data-animation='split-text-blurred'
+              data-zone='section'>
+              Social
+            </h2>
+            <ul
+              class='flex flex-col gap-1.5 font-sans text-sm'
+              data-zone='section'>
+              <li data-animation='split-text-blurred'>Instagram</li>
+              <li data-animation='split-text-blurred'>Linkedin</li>
+              <li data-animation='split-text-blurred'>Github</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script>
+      import { gsap, SplitText } from '@/utils'
+
+      document.addEventListener('DOMContentLoaded', async () => {
+        const indexPage = document.querySelector(
+          '[data-component="Index"]',
+        ) as HTMLElement
+
+        const pinned = document.querySelector(
+          '[data-zone="pinned"]',
+        ) as HTMLElement
+
+        const sections = indexPage.querySelectorAll(
+          '[data-zone="section"]',
+        ) as NodeListOf<HTMLElement>
+
+        const separators = indexPage.querySelectorAll(
+          '[data-zone="separator"]',
+        ) as NodeListOf<HTMLElement>
+
+        const footer = document.querySelector(
+          '[data-component="Footer"]',
+        ) as HTMLElement
+
+        const splitTextBlurred = document.querySelectorAll(
+          '[data-animation="split-text-blurred"]',
+        ) as NodeListOf<HTMLElement>
+
+        await document.fonts.ready
+
+        const splitTextBlurredSplitted = new SplitText(splitTextBlurred, {
+          aria: 'hidden',
+          type: 'words',
+          tag: 'span',
+        })
+
+        const splitTextBlurredChars = splitTextBlurredSplitted.words
+
+        const tl = gsap.timeline()
+
+        tl.from(sections, {
+          translateY: '50%',
+          opacity: 0,
+          duration: 0.4,
+          ease: 'power2.out',
+          stagger: 0.2,
+          //filter: 'blur(4px)',
+          delay: 0.6,
+        })
+          .from(
+            splitTextBlurredChars,
+            {
+              opacity: 0.1,
+              duration: 0.7,
+              //filter: 'blur(4px)',
+              stagger: 0.02,
+              ease: 'power2.out',
+            },
+            '<',
+          )
+          .from(
+            separators,
+            {
+              translateX: '100%',
+              duration: 0.8,
+              ease: 'power2.out',
+              stagger: 0.2,
+            },
+            '<+1.2',
+          )
+
+        gsap.to(pinned, {
+          scrollTrigger: {
+            trigger: footer,
+            start: 'top bottom',
+            scroller: '[data-component="Wrapper"]',
+            end: 'center top',
+            scrub: true,
+          },
+          y: '-8.33%',
+          filter: 'blur(4px)',
+          opacity: 0.5,
+          duration: 1,
+          ease: 'power2.out',
+        })
+      })
+    </script>
+  </Fragment>
 </Layout>

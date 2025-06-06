@@ -1,0 +1,103 @@
+---
+
+---
+
+<div class='fixed inset-0 -z-1' aria-hidden='true' data-component='Background'>
+  <div class='noise pointer-events-none absolute inset-0 z-1'></div>
+</div>
+
+<script>
+  import * as THREE from 'three'
+
+  import fragmentShader from '@/assets/glsl/background.frag?raw'
+  import vertexShader from '@/assets/glsl/background.vert?raw'
+
+  const root = document.querySelector(
+    '[data-component="Background"]',
+  ) as HTMLElement
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true })
+  renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.setPixelRatio(1)
+  root.appendChild(renderer.domElement)
+
+  const scene = new THREE.Scene()
+
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100,
+  )
+  camera.position.z = 2
+
+  const geometry = new THREE.BoxGeometry(3, 3, 3)
+
+  const uniforms = {
+    time: { value: 0 },
+    opacity: { value: 1 },
+    _scale: { value: 1 },
+    mouse: { value: new THREE.Vector3(0, 0, 0) },
+    stepSize: { value: 1.0 },
+    resolution: {
+      value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+    },
+  }
+
+  const material = new THREE.ShaderMaterial({
+    uniforms,
+    vertexShader,
+    fragmentShader,
+  })
+
+  const mesh = new THREE.Mesh(geometry, material)
+  scene.add(mesh)
+
+  const targetMouse = { x: 0, y: 0 }
+  const currentMouse = { x: 0, y: 0 }
+
+  function animate(time = 0) {
+    requestAnimationFrame(animate)
+
+    material.uniforms.time.value = time * 0.001
+
+    currentMouse.x = THREE.MathUtils.lerp(currentMouse.x, targetMouse.x, 0.075)
+    currentMouse.y = THREE.MathUtils.lerp(currentMouse.y, targetMouse.y, 0.075)
+    uniforms.mouse.value.x = currentMouse.x
+    uniforms.mouse.value.y = currentMouse.y
+
+    renderer.render(scene, camera)
+  }
+
+  animate()
+
+  window.addEventListener('resize', () => {
+    const width = window.innerWidth
+    const height = window.innerHeight
+
+    renderer.setSize(width, height)
+    camera.aspect = width / height
+
+    camera.updateProjectionMatrix()
+  })
+
+  function updateMousePosition(x: number, y: number) {
+    targetMouse.x = x / window.innerWidth
+    targetMouse.y = (y * 2) / window.innerHeight
+  }
+
+  window.addEventListener('mousemove', (event) => {
+    updateMousePosition(event.clientX, event.clientY)
+  })
+
+  window.addEventListener(
+    'touchmove',
+    (event) => {
+      if (event.touches.length > 0) {
+        const touch = event.touches[0]
+        updateMousePosition(touch.clientX * 2, touch.clientY * 2)
+      }
+    },
+    { passive: true },
+  )
+</script>
