@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v4
+
       - name: 🤓 Read .nvmrc
         id: nvm
         run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_OUTPUT
-
-      - name: ⬇️ Checkout code
-        uses: actions/checkout@v4
 
       - name: 📦 Install PNPM
         uses: pnpm/action-setup@v4
