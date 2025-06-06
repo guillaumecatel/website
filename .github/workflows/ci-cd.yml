@@ -13,8 +13,8 @@ jobs:
 
     steps:
       - name: 🤓 Read .nvmrc
-        run: echo "{NODE_VERSION}={$(cat .nvmrc)}" >> $GITHUB_OUTPUT
         id: nvm
+        run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_OUTPUT
 
       - name: ⬇️ Checkout code
         uses: actions/checkout@v4
