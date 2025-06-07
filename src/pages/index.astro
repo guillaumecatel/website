@@ -78,11 +78,11 @@ const socialLinks = [
               Services
             </h3>
             <ul
-              class='invisible flex flex-col gap-1.5 font-sans text-sm noscript:visible'
+              class='invisible flex flex-col font-sans text-sm noscript:visible'
               data-zone='section'>
               <li>
                 <a
-                  class='pointer-events-auto'
+                  class='pointer-events-auto block py-1'
                   href='mailto:hello@guillaumecatel.com'
                   target='_blank'
                   rel='noopener noreferrer'>
@@ -103,14 +103,12 @@ const socialLinks = [
               data-zone='section'>
               Social
             </h3>
-            <ul
-              class='flex flex-col gap-1.5 font-sans text-sm'
-              data-zone='section'>
+            <ul class='flex flex-col font-sans text-sm' data-zone='section'>
               {
                 socialLinks.map((link) => (
                   <li>
                     <a
-                      class='pointer-events-auto'
+                      class='pointer-events-auto block py-1'
                       href={link.url}
                       target='_blank'
                       rel='noopener noreferrer'>
