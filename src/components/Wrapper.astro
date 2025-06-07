@@ -3,7 +3,9 @@
 ---
 
 <div
-  class='scroll-behavior-smooth mx-auto h-lvh max-w-2xl snap-y snap-mandatory overflow-y-auto overscroll-none'
+  class='scroll-behavior-smooth h-lvh snap-y snap-mandatory overflow-y-auto overscroll-none'
   data-component='Wrapper'>
-  <slot />
+  <div class='mx-auto max-w-2xl'>
+    <slot />
+  </div>
 </div>

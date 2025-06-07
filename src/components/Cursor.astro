@@ -14,7 +14,7 @@
 
 <script>
   import { NOOP } from '@/constants'
-  import { gsap } from '@/utils'
+  import { gsap } from '@/utils/gsap'
 
   let destroyCursor = NOOP
 
@@ -61,7 +61,6 @@
     window.addEventListener('mousemove', onMouseMove)
 
     interactiveElements.forEach((el) => {
-      el.classList.add('cursor-none')
       el.addEventListener('mouseenter', onMouseEnter)
       el.addEventListener('mouseleave', onMouseLeave)
     })

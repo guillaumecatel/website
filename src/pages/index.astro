@@ -1,24 +1,31 @@
 ---
 import Seo from '@/components/Seo.astro'
 import Layout from '@/layouts/Layout.astro'
-import { actions } from 'astro:actions'
 
-const result = Astro.getActionResult(actions.contact)
-if (result && !result.error) {
-  return Astro.redirect(`/#contact-form`)
-}
+const heading =
+  'Creative and technically versatile front-end developer with a strong background in software engineering and digital design. With solid expertise in modern JavaScript frameworks, creative coding and UI/UX design.'
+const baseline =
+  'I have strong expertise in modern JavaScript frameworks, creative coding and UI/UX design. I thrive in both collaborative and autonomous environments and bring a problem-solving mindset, strong visual culture, and rigorous methodology to each project.'
+const socialLinks = [
+  {
+    name: 'Instagram',
+    url: 'https://instagram.com/guillaumecatel',
+  },
+  {
+    name: 'Linkedin',
+    url: 'https://linkedin.com/in/guillaumecatel',
+  },
+  {
+    name: 'Github',
+    url: 'https://github.com/in/guillaumecatel',
+  },
+]
 ---
 
 <Layout>
   <Fragment slot='head'>
     <Seo
-      title='Guillaume Catel ¬ Creative and front-end developer'
-      description={`
-        Creative and technically versatile front-end developer with a strong
-        background in software engineering and digital design. With solid
-        expertise in modern JavaScript frameworks, creative coding and UI/UX
-        design.
-      `}
+      description={heading}
       jsonLd={{
         '@context': 'https://schema.org',
         '@type': 'Person',
@@ -26,25 +33,16 @@ if (result && !result.error) {
         'url': 'https://guillaumecatel.com/',
         // 'image': 'https://guillaumecatel.com/path-to-your-photo.jpg',
         'jobTitle': 'Creative and front-end developer',
-        'description': `
-          Creative and technically versatile front-end developer with a strong
-          background in software engineering and digital design. With solid
-          expertise in modern JavaScript frameworks, creative coding and UI/UX
-          design.
-        `,
+        'description': heading,
         'email': 'mailto:hello@guillaumecatel.com',
-        'sameAs': [
-          'https://github.com/guillaumecatel',
-          'https://www.linkedin.com/in/guillaumecatel',
-          'https://www.instagram.com/guillaumecatel',
-        ],
+        'sameAs': socialLinks.map((link) => link.url),
       }}
     />
   </Fragment>
 
   <Fragment slot='body'>
     <div class='relative h-lvh' data-component='Index'>
-      <h1 class='sr-only'>Présentation</h1>
+      <h1 class='sr-only'>Presentation</h1>
       <div
         class='pointer-events-none invisible fixed right-0 bottom-0 left-0 mx-auto flex max-w-2xl flex-col gap-12 px-3 py-36 will-change-scroll noscript:visible'
         data-zone='pinned'>
@@ -54,30 +52,17 @@ if (result && !result.error) {
             data-zone='section'
             aria-hidden='true'
             data-animation='split-text-blurred'>
-            Creative and technically versatile front-end developer with a solid
-            background in software engineering and digital design.
+            {heading}
           </div>
-          <p class='sr-only'>
-            Creative and technically versatile front-end developer with a strong
-            background in software engineering and digital design. With solid
-            expertise in modern JavaScript frameworks, creative coding and UI/UX
-            design.
-          </p>
+          <p class='sr-only'>{heading}</p>
           <div
             class='text-md animate-text invisible px-[8.333%] pr-3 will-change-contents noscript:visible'
             data-zone='section'
             aria-hidden='true'
             data-animation='split-text-blurred'>
-            I have strong expertise in modern JavaScript frameworks, creative
-            coding and UI/UX design. I thrive in both collaborative and
-            autonomous environments and bring a problem-solving mindset, strong
-            visual culture, and rigorous methodology to each project.
+            {baseline}
           </div>
-          <p class='sr-only'>
-            “I thrive in both collaborative and autonomous environments and
-            bring a problem-solving mindset, strong visual culture, and rigorous
-            methodology to each project.”
-          </p>
+          <p class='sr-only'>{baseline}</p>
         </div>
         <hr
           class='border-accent-950/10 border-0 border-t'
@@ -86,43 +71,64 @@ if (result && !result.error) {
         <section class='grid grid-cols-12 flex-col-reverse gap-3'>
           <h2 class='sr-only'>Informations</h2>
           <div class='col-span-8 flex flex-col gap-3'>
-            <h2
+            <h3
               class='invisible font-sans text-xs font-medium uppercase noscript:visible'
               data-animation='split-text-blurred'
               data-zone='section'>
               Services
-            </h2>
+            </h3>
             <ul
               class='invisible flex flex-col gap-1.5 font-sans text-sm noscript:visible'
               data-zone='section'>
-              <li data-animation='split-text-blurred'>
-                hello@guillaumecatel.com
+              <li>
+                <a
+                  class='pointer-events-auto'
+                  href='mailto:hello@guillaumecatel.com'
+                  target='_blank'
+                  rel='noopener noreferrer'>
+                  <span data-animation='split-text-blurred'>
+                    hello@guillaumecatel.com
+                  </span>
+                  <span class='sr-only'>hello@guillaumecatel.com</span>
+                </a>
               </li>
-              <li data-animation='split-text-blurred'>Download my resume</li>
             </ul>
           </div>
           <div
             class='invisible col-span-4 flex flex-col gap-3 noscript:visible'
             data-zone='section'>
-            <h2
+            <h3
               class='font-sans text-xs font-medium uppercase'
               data-animation='split-text-blurred'
               data-zone='section'>
               Social
-            </h2>
+            </h3>
             <ul
               class='flex flex-col gap-1.5 font-sans text-sm'
               data-zone='section'>
-              <li data-animation='split-text-blurred'>Instagram</li>
-              <li data-animation='split-text-blurred'>Linkedin</li>
-              <li data-animation='split-text-blurred'>Github</li>
+              {
+                socialLinks.map((link) => (
+                  <li>
+                    <a
+                      class='pointer-events-auto'
+                      href={link.url}
+                      target='_blank'
+                      rel='noopener noreferrer'>
+                      <span data-animation='split-text-blurred'>
+                        {link.name}
+                      </span>
+                      <span class='sr-only'>{link.name}</span>
+                    </a>
+                  </li>
+                ))
+              }
             </ul>
           </div>
         </section>
       </div>
     </div>
     <script>
-      import { gsap, SplitText } from '@/utils'
+      import { gsap, SplitText } from '@/utils/gsap'
 
       document.addEventListener('DOMContentLoaded', async () => {
         const indexPage = document.querySelector(

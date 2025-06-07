@@ -16,7 +16,7 @@ const isPwa = Astro.url.searchParams.get('source') === 'pwa'
     isWebglAvailable,
     subscribeBatteryStatus,
     subscribeNetworkStatus,
-  } from '@/utils'
+  } from '@/utils/device'
 
   let unsubscribeBatteryStatus = NOOP
   let unsubscribeNetworkStatus = NOOP

@@ -30,15 +30,15 @@ pnpm install
 
 ## 📜 Scripts
 
-| Script           | Description                            |
-|------------------|----------------------------------------|
-| `pnpm dev`     | Start the Astro development server     |
-| `pnpm build`   | Build the site for production          |
-| `pnpm start`   | Start the Express server (serves `dist/`) |
-| `pnpm lint`    | Fix lint issues using ESLint           |
-| `pnpm format`  | Format code with Prettier              |
-| `pnpm test:unit` | Run unit tests (placeholder)         |
-| `pnpm test:e2e`  | Run E2E tests (placeholder)          |
+| Script           | Description                               |
+| ---------------- | ----------------------------------------- |
+| `pnpm dev`       | Start the Astro development server        |
+| `pnpm build`     | Build the site for production             |
+| `pnpm start`     | Start the Express server (serves `dist/`) |
+| `pnpm lint`      | Fix lint issues using ESLint              |
+| `pnpm format`    | Format code with Prettier                 |
+| `pnpm test:unit` | Run unit tests (placeholder)              |
+| `pnpm test:e2e`  | Run E2E tests (placeholder)               |
 
 ---
 

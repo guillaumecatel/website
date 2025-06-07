@@ -27,15 +27,15 @@ import Wrapper from '@/components/Wrapper.astro'
         <Background server:defer />
       </Wrapper>
       <script>
-        import { gsap } from '@/utils'
+        import { gsap } from '@/utils/gsap'
 
         document.addEventListener('DOMContentLoaded', () => {
           const header = document.querySelector(
             '[data-component="Header"]',
           ) as HTMLElement
-          const callToAction = document.querySelector(
-            '[data-component="CallToAction"]',
-          ) as HTMLElement
+          // const callToAction = document.querySelector(
+          //   '[data-component="CallToAction"]',
+          // ) as HTMLElement
           const footer = document.querySelector(
             '[data-component="Footer"]',
           ) as HTMLElement
@@ -43,25 +43,38 @@ import Wrapper from '@/components/Wrapper.astro'
           gsap.fromTo(
             header,
             { y: -100, opacity: 0, autoAlpha: 0 },
-            { y: 0, opacity: 1, duration: 0.5, autoAlpha: 1, ease: 'power2.out' },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.5,
+              autoAlpha: 1,
+              ease: 'power2.out',
+            },
           )
-          gsap.fromTo(
-            callToAction,
-            { y: 100, opacity: 0, autoAlpha: 0 },
-            { y: 0, opacity: 1, duration: 0.5, autoAlpha: 1, ease: 'power2.out', delay: 0.2 },
-          )
+          // gsap.fromTo(
+          //   callToAction,
+          //   { y: 100, opacity: 0, autoAlpha: 0 },
+          //   {
+          //     y: 0,
+          //     opacity: 1,
+          //     duration: 0.5,
+          //     autoAlpha: 1,
+          //     ease: 'power2.out',
+          //     delay: 0.2,
+          //   },
+          // )
 
           const footerObserver = new IntersectionObserver(
             (entries) => {
-              entries.forEach((entry) => {
+              entries.forEach(() => {
                 flipLogo()
-                if (entry.isIntersecting) {
-                  revealCallToActionText('-50%')
-                  callToAction.dataset.ready = 'true'
-                } else {
-                  revealCallToActionText(0)
-                  callToAction.dataset.ready = 'false'
-                }
+                // if (entry.isIntersecting) {
+                //   revealCallToActionText('-50%')
+                //   callToAction.dataset.ready = 'true'
+                // } else {
+                //   revealCallToActionText(0)
+                //   callToAction.dataset.ready = 'false'
+                // }
               })
             },
             { threshold: 0.5 },
@@ -69,12 +82,12 @@ import Wrapper from '@/components/Wrapper.astro'
 
           footerObserver.observe(footer)
 
-          const revealCallToActionText = (y: number | string) => {
-            const ctaText = callToAction.querySelector('span')
-            if (ctaText) {
-              gsap.to(ctaText, { translateY: y })
-            }
-          }
+          // const revealCallToActionText = (y: number | string) => {
+          //   const ctaText = callToAction.querySelector('span')
+          //   if (ctaText) {
+          //     gsap.to(ctaText, { translateY: y })
+          //   }
+          // }
 
           const flipLogo = () => {
             const logo = document.querySelector('[data-component="Logo"]')
