@@ -28,14 +28,17 @@ const socialLinks = [
       description={heading}
       jsonLd={{
         '@context': 'https://schema.org',
-        '@type': 'Person',
-        'name': 'Guillaume Catel',
-        'url': 'https://guillaumecatel.com/',
-        // 'image': 'https://guillaumecatel.com/path-to-your-photo.jpg',
-        'jobTitle': 'Creative and front-end developer',
-        'description': heading,
-        'email': 'mailto:hello@guillaumecatel.com',
-        'sameAs': socialLinks.map((link) => link.url),
+        '@type': 'ProfilePage',
+        'mainEntity': {
+          '@type': 'Person',
+          'name': 'Guillaume Catel',
+          'url': 'https://guillaumecatel.com/',
+          // 'image': 'https://guillaumecatel.com/path-to-your-photo.jpg',
+          'jobTitle': 'Creative and front-end developer',
+          'description': heading,
+          'email': 'mailto:hello@guillaumecatel.com',
+          'sameAs': socialLinks.map((link) => link.url),
+        },
       }}
     />
   </Fragment>
