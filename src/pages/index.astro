@@ -4,6 +4,8 @@ import Layout from '@/layouts/Layout.astro'
 
 const heading =
   'Creative and technically versatile front-end developer with a strong background in software engineering and digital design. With solid expertise in modern JavaScript frameworks, creative coding and UI/UX design.'
+const shortHeading =
+  'Creative and technically versatile front-end developer with a strong background in software engineering and digital design.'
 const baseline =
   'I have strong expertise in modern JavaScript frameworks, creative coding and UI/UX design. I thrive in both collaborative and autonomous environments and bring a problem-solving mindset, strong visual culture, and rigorous methodology to each project.'
 const socialLinks = [
@@ -25,7 +27,7 @@ const socialLinks = [
 <Layout>
   <Fragment slot='head'>
     <Seo
-      description={heading}
+      description={shortHeading}
       jsonLd={{
         '@context': 'https://schema.org',
         '@type': 'ProfilePage',

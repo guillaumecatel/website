@@ -23,6 +23,9 @@ importers:
       nodemailer:
         specifier: ^7.0.3
         version: 7.0.3
+      permissions-policy:
+        specifier: ^0.6.0
+        version: 0.6.0
       three:
         specifier: ^0.177.0
         version: 0.177.0
@@ -2431,6 +2434,10 @@ packages:
   path-to-regexp@8.2.0:
     resolution: {integrity: sha512-TdrF7fW9Rphjq4RjrW0Kp2AW0Ahwu9sRGTkS6bvDi0SCwZlEZYmcfDbEsTz8RVk0EHIS/Vd1bv3JhG+1xZuAyQ==}
     engines: {node: '>=16'}
+
+  permissions-policy@0.6.0:
+    resolution: {integrity: sha512-VfN72swhRiuvfejFP/N5hOVCyriBgzy1KiLE8mjN2KkCJCOtFv2N221SVUHYl0OPXIOoqu7tkc7efreiN7encA==}
+    engines: {node: '>=10.0.0'}
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -6029,6 +6036,8 @@ snapshots:
   path-key@3.1.1: {}
 
   path-to-regexp@8.2.0: {}
+
+  permissions-policy@0.6.0: {}
 
   picocolors@1.1.1: {}
 

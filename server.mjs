@@ -1,6 +1,7 @@
 import compression from 'compression'
 import express from 'express'
 import helmet from 'helmet'
+import permissionsPolicy from 'permissions-policy'
 
 import { handler } from './dist/server/entry.mjs'
 
@@ -21,6 +22,22 @@ app.use(
   }),
 )
 
+app.use((_, res, next) => {
+  const originalSetHeader = res.setHeader.bind(res)
+
+  res.setHeader = (name, value) => {
+    if (name.toLowerCase() === 'content-type' && typeof value === 'string') {
+      if (!value.toLowerCase().includes('charset=')) {
+        value += '; charset=utf-8'
+      }
+    }
+
+    return originalSetHeader(name, value)
+  }
+
+  next()
+})
+
 app.use(
   helmet({
     contentSecurityPolicy: {
@@ -32,6 +49,14 @@ app.use(
     crossOriginOpenerPolicy: 'same-origin',
     crossOriginEmbedderPolicy: 'require-corp',
     originAgentCluster: true,
+  }),
+)
+
+app.use(
+  permissionsPolicy({
+    features: {
+      fullscreen: ['self'], // fullscreen=()
+    },
   }),
 )
 
