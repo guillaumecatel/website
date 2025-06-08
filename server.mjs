@@ -42,12 +42,14 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        'script-src': [
+        defaultSrc: ["'self'"],
+        scriptSrc: [
           "'self'",
           'analytics.guillaumecatel.com',
           "'unsafe-inline'",
         ],
-        'img-src': ["'self'", 'data:', 'blob:'],
+        imgSrc: ["'self'", 'data:', 'blob:', 'analytics.guillaumecatel.com'],
+        connectSrc: ["'self'", 'analytics.guillaumecatel.com'],
       },
     },
     crossOriginOpenerPolicy: false,
