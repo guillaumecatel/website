@@ -1,6 +1,6 @@
-# 🌐 website-2025
+# 🌐 Website
 
-**website-2025** is the 2025 edition of a modern web application powered by [Astro](https://astro.build), with a focus on performance, scalability, and expressive UI animation using GSAP and Three.js.
+My personal website powered by [Astro](https://astro.build), with a focus on performance, scalability, and expressive UI animation using GSAP and Three.js.
 It runs on an [Express](https://expressjs.com/) server with security middleware like Helmet and supports compression out of the box.
 
 ---
@@ -62,13 +62,13 @@ This project is containerized with a multi-stage Dockerfile for optimal performa
 ### 🛠️ Build the Docker image
 
 ```bash
-docker build -t website-2025 .
+docker build -t website .
 ```
 
 ### ▶️ Run the container
 
 ```bash
-docker run -p 8000:8000 website-2025
+docker run -p 8000:8000 website
 ```
 
 > The site will be accessible at: [http://localhost:8000](http://localhost:8000)
@@ -104,4 +104,4 @@ This repository is designed to be used with a CI/CD pipeline that performs:
 
 ## 📄 License
 
-MIT © Guillaume Catel
+MIT © Guillaume CATEL
