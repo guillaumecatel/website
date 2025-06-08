@@ -11,7 +11,7 @@
     "format": "prettier . --write",
     "lint": "eslint --fix",
     "test:unit": "echo 'No unit tests defined'",
-    "test:e2e": "echo 'No unit tests defined'"
+    "test:e2e": "echo 'No e2e tests defined'"
   },
   "dependencies": {
     "compression": "^1.8.0",
