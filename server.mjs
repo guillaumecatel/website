@@ -42,7 +42,11 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        'script-src': ["'self'", "'unsafe-inline'"],
+        'script-src': [
+          "'self'",
+          'analytics.guillaumecatel.com',
+          "'unsafe-inline'",
+        ],
         'img-src': ["'self'", 'data:', 'blob:'],
       },
     },

@@ -1,5 +1,7 @@
 ---
 import { Font } from 'astro:assets'
+
+import Analytics from './Analytics.astro'
 ---
 
 <head>
@@ -29,4 +31,5 @@ import { Font } from 'astro:assets'
   <link rel='manifest' href={`/manifest.webmanifest`} />
   <Font cssVariable='--font-sans' preload />
   <Font cssVariable='--font-serif' preload />
+  <Analytics />
 </head>
