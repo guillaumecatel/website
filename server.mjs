@@ -61,7 +61,7 @@ app.use(
 app.use(
   permissionsPolicy({
     features: {
-      fullscreen: ['self'], // fullscreen=()
+      fullscreen: ['self'],
     },
   }),
 )
