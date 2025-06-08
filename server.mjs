@@ -50,8 +50,8 @@ app.use(
         'img-src': ["'self'", 'data:', 'blob:'],
       },
     },
-    crossOriginOpenerPolicy: 'same-origin',
-    crossOriginEmbedderPolicy: 'require-corp',
+    crossOriginOpenerPolicy: false,
+    crossOriginEmbedderPolicy: false,
     originAgentCluster: true,
   }),
 )
