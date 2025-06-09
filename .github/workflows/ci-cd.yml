@@ -80,7 +80,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.PRIVATE_REGISTRY_URL }}/${{ github.repository_owner }}/${{ github.event.repository.name }}
+          images: ${{ secrets.PRIVATE_REGISTRY_URL }}/${{ github.repository_owner }}/${{ github.event.repository.name }}-staging
           tags: |
             type=raw,value=latest
           labels: |
