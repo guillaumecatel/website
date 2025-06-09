@@ -46,8 +46,59 @@ jobs:
       - name: 🚀 E2E tests
         run: pnpm test:e2e
 
-  docker-build-on-tag:
-    name: 🐳 Build & Push Docker image (on tag)
+      - name: 🏗️ Build
+        run: pnpm build
+
+  docker-build-staging:
+    name: 🐳 Build & Push Docker image (staging)
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🤓 Read .nvmrc
+        id: nvm
+        run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🔐 Log in to Private Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.PRIVATE_REGISTRY_URL }}
+          username: ${{ secrets.PRIVATE_REGISTRY_USERNAME }}
+          password: ${{ secrets.PRIVATE_REGISTRY_PASSWORD }}
+
+      - name: 📦 Extract metadata (staging)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ secrets.PRIVATE_REGISTRY_URL }}/${{ github.repository_owner }}/${{ github.event.repository.name }}
+          tags: |
+            type=raw,value=latest
+          labels: |
+            org.opencontainers.image.version=staging
+            org.opencontainers.image.source=${{ github.repositoryUrl }}
+
+      - name: 🔧 Build & Push Docker image (staging)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            NODE_VERSION=${{ steps.nvm.outputs.NODE_VERSION }}
+
+  docker-build-production:
+    name: 🐳 Build & Push Docker image (production)
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
 

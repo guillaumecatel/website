@@ -80,7 +80,10 @@ docker run -p 8000:8000 website
 This repository is designed to be used with a CI/CD pipeline that performs:
 
 1. ✅ Lint and format checks
-2. 🧪 Run tests (`test:unit`, `test:e2e`)
+2. 🧪 Run tests
+
+(if staging or production)
+
 3. 🏗️ Build the Docker image
 4. 📤 Push the image to Docker registry
 5. 🚀 Deploy on infrastructure
