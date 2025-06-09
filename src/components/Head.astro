@@ -28,7 +28,11 @@ import Analytics from './Analytics.astro'
     name='apple-mobile-web-app-status-bar-style'
     content='black-translucent'
   />
-  <link rel='manifest' href={`/manifest.webmanifest`} />
+  <link
+    rel='manifest'
+    href={`/manifest.webmanifest`}
+    crossorigin='use-credentials'
+  />
   <Font cssVariable='--font-sans' preload />
   <Font cssVariable='--font-serif' preload />
   <Analytics />
