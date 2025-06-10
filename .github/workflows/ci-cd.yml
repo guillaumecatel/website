@@ -11,6 +11,8 @@ jobs:
   lint-and-test:
     name: 🔍 Lint, Format & Test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: ⬇️ Checkout code
