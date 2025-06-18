@@ -11,41 +11,38 @@
 
 @theme {
   /* Spacing */
-  --spacing: 0.25rem; /* 4px */
+  --spacing: 1.026vw; /* 4px */
 
   /* Typography */
-  --text-lg: 1.5rem; /* 24px */
-  --text-lg--line-height: 1.75rem; /* 28px */
-  --text-lg--letter-spacing: -0.0125em; /* -1.25% */
 
-  --text-lg: 1.75rem; /* 28px */
-  --text-lg--line-height: 1.1429; /* 28px */
-  --text-lg--letter-spacing: -0.015em; /* -1.25% */
+  --text-lg: 7.1795vw;
+  --text-lg--line-height: 1;
+  --text-lg--letter-spacing: -0.015em;
 
-  --text-md: 1.0625rem; /* 17px */
-  --text-md--line-height: 1.25rem; /* 20px */
-  --text-md--letter-spacing: -0.0053em; /* -0.53% */
+  --text-md: 4.3589vw;
+  --text-md--line-height: 1.25;
+  --text-md--letter-spacing: -0.0053em;
 
-  --text-sm: 0.875rem; /* 14px */
-  --text-sm--line-height: 1rem; /* 16px */
-  --text-sm--letter-spacing: 0em; /* 0% */
+  --text-sm: 3.5897vw;
+  --text-sm--line-height: 1;
+  --text-sm--letter-spacing: 0em;
 
-  --text-xs: 0.625rem; /* 10px */
-  --text-xs--line-height: 0.75rem; /* 12px */
-  --text-xs--letter-spacing: 0.012em; /* 1.2% */
+  --text-xs: 2.5641vw;
+  --text-xs--line-height: 0.75;
+  --text-xs--letter-spacing: 0.012em;
 
   /* Colors */
-  --color-accent-50: oklch(99.38% 0.001 106.42);
-  --color-accent-100: oklch(99.38% 0.001 106.42);
-  --color-accent-200: oklch(98.8% 0.004 91.45);
-  --color-accent-300: oklch(98.37% 0.007 106.52);
-  --color-accent-400: oklch(97.72% 0.009 106.57);
-  --color-accent-500: oklch(96.85% 0.012 101.48);
-  --color-accent-600: oklch(86.09% 0.052 101.36);
-  --color-accent-700: oklch(75.02% 0.093 103.47);
-  --color-accent-800: oklch(58.09% 0.085 103.81);
-  --color-accent-900: oklch(35.97% 0.048 101.97);
-  --color-accent-950: oklch(23.15% 0.027 105);
+  --color-accent-50: oklch(96.21% 0.036 205.19);
+  --color-accent-100: oklch(92.32% 0.076 205.13);
+  --color-accent-200: oklch(85.58% 0.135 203.25);
+  --color-accent-300: oklch(78.83% 0.124 202.81);
+  --color-accent-400: oklch(72.56% 0.114 202.95);
+  --color-accent-500: oklch(62.85% 0.099 202.77);
+  --color-accent-600: oklch(52.48% 0.083 203.66);
+  --color-accent-700: oklch(43.18% 0.068 203.31);
+  --color-accent-800: oklch(32.97% 0.052 202.74);
+  --color-accent-900: oklch(23.81% 0.038 200.78);
+  --color-accent-950: oklch(18.31% 0.03 202.87);
 }
 
 @layer utilities {
@@ -56,8 +53,24 @@
     height: 100%;
     background-image: url("data:image/svg+xml,%3C!-- svg: first layer --%3E%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     background-repeat: repeat;
-    mix-blend-mode: soft-light;
-    filter: opacity(0.25);
+  }
+
+  .glass-lines:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content: '';
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(10px);
+    background-image: repeating-linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.1) 0px,
+      rgba(255, 255, 255, 0.1) 0px,
+      transparent 32px,
+      transparent 0
+    );
   }
 
   input:-webkit-autofill,

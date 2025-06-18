@@ -1,14 +1,12 @@
 ---
-import Background from '@/components/Background.astro'
-import Body from '@/components/Body.astro'
-import Content from '@/components/Content.astro'
-import Cursor from '@/components/Cursor.astro'
-import Document from '@/components/Document.astro'
-import Footer from '@/components/Footer.astro'
-import Head from '@/components/Head.astro'
-import Header from '@/components/Header.astro'
-import Html from '@/components/Html.astro'
-import Wrapper from '@/components/Wrapper.astro'
+import Body from '@/components/astro/Body.astro'
+import Document from '@/components/astro/Document.astro'
+import Head from '@/components/astro/Head.astro'
+import Html from '@/components/astro/Html.astro'
+
+import Background from '@/components/react/Background'
+import Cursor from '@/components/react/Cursor'
+import Wrapper from '@/components/react/Wrapper'
 ---
 
 <Document>
@@ -17,91 +15,18 @@ import Wrapper from '@/components/Wrapper.astro'
       <slot name='head' />
     </Head>
     <Body>
-      <Wrapper>
-        <Header />
-        <Content>
-          <slot name='body' />
-        </Content>
-        <Footer />
-        <Cursor />
-        <Background server:defer />
+      <Background
+        client:visible
+        client:only='react'
+      />
+      <Cursor
+        client:visible
+        client:media='(pointer: fine)'
+        client:only='react'
+      />
+      <Wrapper client:load>
+        <slot name='body' />
       </Wrapper>
-      <script>
-        import { gsap } from '@/utils/gsap'
-
-        document.addEventListener('DOMContentLoaded', () => {
-          const header = document.querySelector(
-            '[data-component="Header"]',
-          ) as HTMLElement
-          // const callToAction = document.querySelector(
-          //   '[data-component="CallToAction"]',
-          // ) as HTMLElement
-          const footer = document.querySelector(
-            '[data-component="Footer"]',
-          ) as HTMLElement
-
-          gsap.fromTo(
-            header,
-            { y: -100, opacity: 0, autoAlpha: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.5,
-              autoAlpha: 1,
-              ease: 'power2.out',
-            },
-          )
-          // gsap.fromTo(
-          //   callToAction,
-          //   { y: 100, opacity: 0, autoAlpha: 0 },
-          //   {
-          //     y: 0,
-          //     opacity: 1,
-          //     duration: 0.5,
-          //     autoAlpha: 1,
-          //     ease: 'power2.out',
-          //     delay: 0.2,
-          //   },
-          // )
-
-          const footerObserver = new IntersectionObserver(
-            (entries) => {
-              entries.forEach(() => {
-                flipLogo()
-                // if (entry.isIntersecting) {
-                //   revealCallToActionText('-50%')
-                //   callToAction.dataset.ready = 'true'
-                // } else {
-                //   revealCallToActionText(0)
-                //   callToAction.dataset.ready = 'false'
-                // }
-              })
-            },
-            { threshold: 0.5 },
-          )
-
-          footerObserver.observe(footer)
-
-          // const revealCallToActionText = (y: number | string) => {
-          //   const ctaText = callToAction.querySelector('span')
-          //   if (ctaText) {
-          //     gsap.to(ctaText, { translateY: y })
-          //   }
-          // }
-
-          const flipLogo = () => {
-            const logo = document.querySelector('[data-component="Logo"]')
-            if (logo) {
-              gsap.set(logo, { rotationY: 0 })
-              gsap.to(logo, {
-                rotationY: 360,
-                duration: 0.8,
-                ease: 'power2.inOut',
-              })
-            }
-          }
-        })
-      </script>
     </Body>
   </Html>
 </Document>

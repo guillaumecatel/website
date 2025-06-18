@@ -12,6 +12,7 @@ const config = {
   jsxSingleQuote: true,
   bracketSpacing: true,
   bracketSameLine: true,
+  singleAttributePerLine: true,
   overrides: [
     {
       files: '*.svg',
@@ -23,6 +24,7 @@ const config = {
       files: '*.astro',
       options: {
         parser: 'astro',
+        singleAttributePerLine: true,
       },
     },
   ],

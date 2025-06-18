@@ -2,6 +2,8 @@
 import { Font } from 'astro:assets'
 
 import Analytics from './Analytics.astro'
+
+const isProd = import.meta.env.PROD
 ---
 
 <head>
@@ -11,19 +13,30 @@ import Analytics from './Analytics.astro'
     content='width=device-width, initial-scale=1, viewport-fit=cover'
   />
   <slot />
+  <lin
+    rel='preconnect'
+    href='//analytics.guillaume.com'
+  ></lin>
   <link
     rel='icon'
     type='image/png'
     href='/icons/favicon-96x96.png'
     sizes='96x96'
   />
-  <link rel='icon' type='image/svg+xml' href='/icons/favicon.svg' />
+  <link
+    rel='icon'
+    type='image/svg+xml'
+    href='/icons/favicon.svg'
+  />
   <link
     rel='apple-touch-icon'
     sizes='180x180'
     href='/icons/apple-touch-icon.png'
   />
-  <meta name='apple-mobile-web-app-title' content='Guillaume CATEL' />
+  <meta
+    name='apple-mobile-web-app-title'
+    content='Guillaume CATEL'
+  />
   <meta
     name='apple-mobile-web-app-status-bar-style'
     content='black-translucent'
@@ -33,7 +46,13 @@ import Analytics from './Analytics.astro'
     href={`/manifest.webmanifest`}
     crossorigin='use-credentials'
   />
-  <Font cssVariable='--font-sans' preload />
-  <Font cssVariable='--font-serif' preload />
-  <Analytics />
+  <Font
+    cssVariable='--font-sans'
+    preload
+  />
+  <Font
+    cssVariable='--font-serif'
+    preload
+  />
+  {isProd && <Analytics />}
 </head>

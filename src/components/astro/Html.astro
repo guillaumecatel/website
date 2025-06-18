@@ -6,7 +6,7 @@ const isPwa = Astro.url.searchParams.get('source') === 'pwa'
 <html
   lang='en'
   class:list={[isPwa && 'pwa']}
-  class='nowebgl battery network overscroll-none antialiased'>
+  class='nowebgl battery network antialiased'>
   <slot />
 </html>
 

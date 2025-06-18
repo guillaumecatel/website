@@ -1,0 +1,228 @@
+---
+import Seo from '@/components/astro/Seo.astro'
+import Layout from '@/layouts/Layout.astro'
+
+const heading =
+  'Creative and technically versatile front-end developer with a strong background in software engineering and digital design. With solid expertise in modern JavaScript frameworks, creative coding and UI/UX design.'
+const shortHeading =
+  'Creative and technically versatile front-end developer with a strong background in software engineering and digital design.'
+const baseline =
+  'I have strong expertise in modern JavaScript frameworks, creative coding and UI/UX design. I thrive in both collaborative and autonomous environments and bring a problem-solving mindset, strong visual culture, and rigorous methodology to each project.'
+const socialLinks = [
+  {
+    name: 'Instagram',
+    url: 'https://instagram.com/guillaumecatel',
+  },
+  {
+    name: 'Linkedin',
+    url: 'https://linkedin.com/in/guillaumecatel',
+  },
+  {
+    name: 'Github',
+    url: 'https://github.com/guillaumecatel',
+  },
+]
+---
+
+<Layout>
+  <Fragment slot='head'>
+    <Seo
+      description={shortHeading}
+      jsonLd={{
+        '@context': 'https://schema.org',
+        '@type': 'ProfilePage',
+        'mainEntity': {
+          '@type': 'Person',
+          'name': 'Guillaume Catel',
+          'url': 'https://guillaumecatel.com/',
+          // 'image': 'https://guillaumecatel.com/path-to-your-photo.jpg',
+          'jobTitle': 'Creative and front-end developer',
+          'description': heading,
+          'email': 'mailto:hello@guillaumecatel.com',
+          'sameAs': socialLinks.map((link) => link.url),
+        },
+      }}
+    />
+  </Fragment>
+
+  <Fragment slot='body'>
+    <div
+      class='relative flex min-h-lvh flex-col justify-center pt-24'
+      data-component='Index'>
+      <h1 class='sr-only'>About me</h1>
+      <div
+        class='no-invisible pointer-events-none flex max-w-2xl flex-col gap-12 px-3 py-36 noscript:visible'
+        data-zone='pinned'>
+        <div class='flex flex-col gap-6 font-serif text-pretty'>
+          <div
+            class='animate-text no-invisible indent-6 text-lg noscript:visible'
+            data-zone='section'
+            aria-hidden='true'
+            data-animation='split-text-blurred'>
+            {heading}
+          </div>
+          <p class='sr-only'>{heading}</p>
+          <div
+            class='text-md animate-text no-invisible px-[8.333%] pr-3 noscript:visible'
+            data-zone='section'
+            aria-hidden='true'
+            data-animation='split-text-blurred'>
+            {baseline}
+          </div>
+          <p class='sr-only'>{baseline}</p>
+        </div>
+        <hr
+          class='border-accent-950/10 border-0 border-t'
+          data-zone='separator'
+        />
+        <section class='grid grid-cols-12 flex-col-reverse gap-3'>
+          <h2 class='sr-only'>Informations</h2>
+          <div class='col-span-8 flex flex-col gap-3'>
+            <h3
+              class='no-invisible font-sans text-xs font-medium uppercase noscript:visible'
+              data-animation='split-text-blurred'
+              data-zone='section'>
+              Services
+            </h3>
+            <ul
+              class='no-invisible flex flex-col font-sans text-sm noscript:visible'
+              data-zone='section'>
+              <li>
+                <a
+                  class='pointer-events-auto block py-1'
+                  href='mailto:hello@guillaumecatel.com'
+                  target='_blank'
+                  rel='noopener noreferrer'>
+                  <span data-animation='split-text-blurred'>
+                    hello@guillaumecatel.com
+                  </span>
+                  <span class='sr-only'>hello@guillaumecatel.com</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div
+            class='no-invisible col-span-4 flex flex-col gap-3 noscript:visible'
+            data-zone='section'>
+            <h3
+              class='font-sans text-xs font-medium uppercase'
+              data-animation='split-text-blurred'
+              data-zone='section'>
+              Social
+            </h3>
+            <ul
+              class='flex flex-col font-sans text-sm'
+              data-zone='section'>
+              {
+                socialLinks.map((link) => (
+                  <li>
+                    <a
+                      class='pointer-events-auto block py-1'
+                      href={link.url}
+                      target='_blank'
+                      rel='noopener noreferrer'>
+                      <span data-animation='split-text-blurred'>
+                        {link.name}
+                      </span>
+                      <span class='sr-only'>{link.name}</span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+    <!-- <script>
+      import { gsap, SplitText } from '@/utils/gsap'
+
+      document.addEventListener('DOMContentLoaded', async () => {
+        const indexPage = document.querySelector(
+          '[data-component="Index"]',
+        ) as HTMLElement
+
+        const pinned = document.querySelector(
+          '[data-zone="pinned"]',
+        ) as HTMLElement
+
+        const sections = indexPage.querySelectorAll(
+          '[data-zone="section"]',
+        ) as NodeListOf<HTMLElement>
+
+        const separators = indexPage.querySelectorAll(
+          '[data-zone="separator"]',
+        ) as NodeListOf<HTMLElement>
+
+        const footer = document.querySelector(
+          '[data-component="Footer"]',
+        ) as HTMLElement
+
+        const splitTextBlurred = document.querySelectorAll(
+          '[data-animation="split-text-blurred"]',
+        ) as NodeListOf<HTMLElement>
+
+        await document.fonts.ready
+
+        const splitTextBlurredSplitted = new SplitText(splitTextBlurred, {
+          aria: 'hidden',
+          type: 'words',
+          tag: 'span',
+        })
+
+        const splitTextBlurredChars = splitTextBlurredSplitted.words
+
+        const tl = gsap.timeline()
+
+        tl.from(sections, {
+          translateY: '50%',
+          opacity: 0,
+          duration: 0.4,
+          autoAlpha: 0,
+          ease: 'power2.out',
+          stagger: 0.2,
+          //filter: 'blur(4px)',
+          delay: 0.6,
+        })
+          .from(
+            splitTextBlurredChars,
+            {
+              opacity: 0.1,
+              duration: 0.7,
+              //filter: 'blur(4px)',
+              stagger: 0.02,
+
+              ease: 'power2.out',
+            },
+            '<',
+          )
+          .from(
+            separators,
+            {
+              translateX: '100%',
+              duration: 0.8,
+              ease: 'power2.out',
+              stagger: 0.2,
+            },
+            '<+1.2',
+          )
+
+        gsap.to(pinned, {
+          scrollTrigger: {
+            trigger: footer,
+            start: 'top bottom',
+            scroller: '[data-component="Wrapper"]',
+            end: 'center top',
+            scrub: true,
+          },
+          y: '-8.33%',
+          filter: 'blur(4px)',
+          opacity: 0.5,
+          autoAlpha: 0,
+          duration: 1,
+          ease: 'power2.out',
+        })
+      })
+    </script> -->
+  </Fragment>
+</Layout>

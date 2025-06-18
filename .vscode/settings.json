@@ -16,5 +16,8 @@
     "typescript",
     "typescriptreact"
   ],
-  "prettier.documentSelectors": ["**/*.svg", "**/*.astro"]
+  "prettier.documentSelectors": ["**/*.svg", "**/*.astro"],
+  "files.associations": {
+    "*.sp": "javascript"
+  }
 }
