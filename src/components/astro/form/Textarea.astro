@@ -1,0 +1,38 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'textarea'> {
+  label: string
+  id: string
+  name: string
+  placeholder: string
+  errors?: string[]
+}
+
+const { label, id, name, placeholder, errors, ...rest }: Props = Astro.props
+---
+
+<div data-component='Textarea' class='flex flex-col gap-3'>
+  <label class='pl-3 text-sm' for={id}>
+    {label}
+  </label>
+  <textarea
+    id={id}
+    name={name}
+    placeholder={placeholder}
+    aria-describedby={`error-${id}`}
+    class='text-md bg-accent-50/20 focus:ring-accent-900 min-h-48 rounded-3xl p-6 backdrop-blur-sm focus:ring focus:ring-offset-2 focus:ring-offset-transparent focus:outline-0'
+    {...rest}></textarea>
+  <div
+    id={`error-${id}`}
+    class='flex flex-col gap-2'
+    role='alert'
+    aria-live='assertive'>
+    {
+      errors &&
+        errors.map((error) => (
+          <span class='pl-3 text-sm text-red-500'>{error}</span>
+        ))
+    }
+  </div>
+</div>

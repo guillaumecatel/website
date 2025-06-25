@@ -1,0 +1,54 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'video'> {
+  src: string
+  poster?: string
+}
+
+const { src, poster, class: className } = Astro.props
+---
+
+<video
+  class:list={[className]}
+  src={src}
+  poster={poster}
+  data-component='Video'
+  muted
+  playsinline
+  preload='metadata'>
+  <slot />
+</video>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const videos = document.querySelectorAll('video[data-component="Video"]')
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target
+          if (!(video instanceof HTMLVideoElement)) return
+
+          if (entry.isIntersecting) {
+            video.currentTime = 0
+            video.play().catch(() => {
+              console.warn(
+                'Video playback failed, possibly due to autoplay restrictions.',
+              )
+            })
+          } else {
+            video.pause()
+          }
+        })
+      },
+      {
+        threshold: 0.25,
+      },
+    )
+
+    videos.forEach((video) => {
+      observer.observe(video)
+    })
+  })
+</script>

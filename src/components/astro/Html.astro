@@ -1,0 +1,53 @@
+---
+const isPwa = Astro.url.searchParams.get('source') === 'pwa'
+---
+
+<!doctype html>
+<html
+  lang='en'
+  class:list={[isPwa && 'pwa']}
+  class='nowebgl battery network overscroll-none antialiased'
+  data-component='Html'>
+  <slot />
+</html>
+
+<script>
+  import { NOOP } from '@/constants'
+  import {
+    isWebglAvailable,
+    subscribeBatteryStatus,
+    subscribeNetworkStatus,
+  } from '@/utils/client/detections'
+
+  let unsubscribeBatteryStatus = NOOP
+  let unsubscribeNetworkStatus = NOOP
+
+  document.addEventListener('astro:before-swap', () => {
+    unsubscribeBatteryStatus()
+    unsubscribeNetworkStatus()
+  })
+
+  document.addEventListener('astro:page-load', () => {
+    if (isWebglAvailable()) {
+      document.documentElement.classList.replace('nowebgl', 'webgl')
+    } else {
+      document.documentElement.classList.replace('webgl', 'nowebgl')
+    }
+
+    unsubscribeBatteryStatus = subscribeBatteryStatus((status) => {
+      if (status.isLow) {
+        document.documentElement.classList.replace('battery', 'low-battery')
+      } else {
+        document.documentElement.classList.replace('low-battery', 'battery')
+      }
+    })
+
+    unsubscribeNetworkStatus = subscribeNetworkStatus((status) => {
+      if (status.isLow) {
+        document.documentElement.classList.replace('network', 'slow-network')
+      } else {
+        document.documentElement.classList.replace('slow-network', 'network')
+      }
+    })
+  })
+</script>

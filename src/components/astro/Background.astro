@@ -1,0 +1,136 @@
+---
+
+---
+
+<div
+  class='fixed inset-0 -z-1 scale-105'
+  aria-hidden='true'
+  data-component='Background'>
+  <div class='noise pointer-events-none absolute inset-0 z-1'></div>
+</div>
+
+<script>
+  import {
+    BackSide,
+    MathUtils,
+    Mesh,
+    PerspectiveCamera,
+    Scene,
+    ShaderMaterial,
+    SphereGeometry,
+    WebGLRenderer,
+  } from 'three'
+
+  import { toThreeJSUniforms } from '@/utils/client/three'
+
+  import background from '../shader-park/Background.sp'
+
+  let requestAnimationFrameId: number
+  let renderer: WebGLRenderer
+  let scene: Scene
+  let geometry: SphereGeometry
+  let material: ShaderMaterial
+  let mesh: Mesh
+
+  const uniforms = toThreeJSUniforms(background.uniforms)
+  const vertexShader = background.vert
+  const fragmentShader = background.frag
+
+  document.addEventListener('astro:before-preparation', () => {
+    cancelAnimationFrame(requestAnimationFrameId)
+    scene.remove(mesh)
+    geometry.dispose()
+    material.dispose()
+    renderer.dispose()
+  })
+
+  document.addEventListener('astro:page-load', () => {
+    const root = document.querySelector(
+      '[data-component="Background"]',
+    ) as HTMLElement
+
+    if (!root) return
+
+    renderer = new WebGLRenderer({ antialias: true })
+
+    renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setPixelRatio(0.5)
+
+    renderer.domElement.classList.add('filter-[blur(4px)]')
+
+    root.appendChild(renderer.domElement)
+
+    scene = new Scene()
+
+    const camera = new PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      100,
+    )
+
+    //camera.position.y = 1.75
+    camera.position.z = 3
+
+    geometry = new SphereGeometry(12, 12, 12)
+
+    material = new ShaderMaterial({
+      uniforms,
+      vertexShader,
+      fragmentShader,
+      side: BackSide,
+      transparent: true,
+    })
+
+    mesh = new Mesh(geometry, material)
+    scene.add(mesh)
+
+    const targetMouse = { x: 0, y: 0 }
+    const currentMouse = { x: 0, y: 0 }
+
+    function animate(time = 0) {
+      requestAnimationFrameId = requestAnimationFrame(animate)
+
+      material.uniforms.time.value = time * 0.003
+
+      currentMouse.x = MathUtils.lerp(currentMouse.x, targetMouse.x, 0.075)
+      currentMouse.y = MathUtils.lerp(currentMouse.y, targetMouse.y, 0.075)
+      uniforms.mouse.value.x = currentMouse.x
+      uniforms.mouse.value.y = currentMouse.y
+
+      renderer.render(scene, camera)
+    }
+
+    animate()
+
+    window.addEventListener('resize', () => {
+      const width = window.innerWidth
+      const height = window.innerHeight
+
+      renderer.setSize(width, height)
+      camera.aspect = width / height
+
+      camera.updateProjectionMatrix()
+    })
+
+    function updateMousePosition(x: number, y: number) {
+      targetMouse.x = x / window.innerWidth
+      targetMouse.y = (y * 2) / window.innerHeight
+    }
+
+    window.addEventListener('mousemove', (event) => {
+      updateMousePosition(event.clientX, event.clientY)
+    })
+
+    window.addEventListener(
+      'touchmove',
+      (event) => {
+        if (event.touches.length > 0) {
+          const touch = event.touches[0]
+          updateMousePosition(touch.clientX * 4, touch.clientY * 4)
+        }
+      },
+      { passive: false },
+    )
+  })
+</script>

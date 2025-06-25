@@ -1,9 +1,19 @@
 ---
-import Seo from '@/components/Seo.astro'
+import { getImage } from 'astro:assets'
+
+import Card from '@/components/astro/Card.astro'
+import List from '@/components/astro/List.astro'
+import ListItem from '@/components/astro/ListItem.astro'
+import Seo from '@/components/astro/Seo.astro'
+import Video from '@/components/astro/Video.astro'
+
 import Layout from '@/layouts/Layout.astro'
 
+import posterElectroAudiogram from '@/assets/images/thumbnail-electro-audiogram.png'
+import videoElectroAudiogram from '@/assets/videos/thumbnail-electro-audiogram.mp4'
+
 const heading =
-  'Creative and technically versatile front-end developer with a strong background in software engineering and digital design. With solid expertise in modern JavaScript frameworks, creative coding and UI/UX design.'
+  'Creative and technically versatile front-end developer with a strong background in software engineering and digital design.'
 const shortHeading =
   'Creative and technically versatile front-end developer with a strong background in software engineering and digital design.'
 const baseline =
@@ -20,6 +30,22 @@ const socialLinks = [
   {
     name: 'Github',
     url: 'https://github.com/guillaumecatel',
+  },
+]
+
+const showcaseItems = [
+  {
+    title: 'Festival Electro Audiogram',
+    description:
+      'Branding, UX/UI Design, development and live coding performance',
+    poster: await getImage({
+      src: posterElectroAudiogram,
+      width: 940,
+      format: 'avif',
+    }),
+    video: videoElectroAudiogram,
+    wip: true,
+    liveUrl: undefined,
   },
 ]
 ---
@@ -46,179 +72,96 @@ const socialLinks = [
   </Fragment>
 
   <Fragment slot='body'>
-    <div class='relative h-lvh' data-component='Index'>
-      <h1 class='sr-only'>About me</h1>
+    <div id='smooth-wrapper'>
       <div
-        class='pointer-events-none invisible fixed right-0 bottom-0 left-0 mx-auto flex max-w-2xl flex-col gap-12 px-3 py-36 will-change-scroll noscript:visible'
-        data-zone='pinned'>
-        <div class='flex flex-col gap-6 font-serif text-pretty'>
+        id='smooth-content'
+        class='relative flex max-w-120 flex-col md:mx-auto'
+        data-page='Index'>
+        <div
+          class='relative flex min-h-lvh flex-col pt-[var(--layout-safe-area-inset-start)] pb-[var(--layout-safe-area-inset-end)]'
+          data-page-section='Hero'>
           <div
-            class='animate-text invisible indent-6 text-lg will-change-contents noscript:visible'
-            data-zone='section'
-            aria-hidden='true'
-            data-animation='split-text-blurred'>
-            {heading}
+            class='mt-auto flex flex-col justify-end gap-12'
+            data-page-section='HeroInner'
+            data-speed='0.5'>
+            <h1 class='sr-only'>Guillaume CATEL</h1>
+            <div class='flex flex-col gap-6 px-3 font-serif text-pretty'>
+              <span
+                data-page-section='HeroHeading'
+                class='invisible inline-block font-sans text-lg font-normal noscript:visible'
+                aria-hidden='true'>
+                {heading}
+              </span>
+              <p class='sr-only'>{heading}</p>
+              <span
+                data-page-section='HeroBaseline'
+                class='text-md invisible font-sans font-light noscript:visible'
+                aria-hidden='true'>
+                {baseline}
+              </span>
+              <p class='sr-only'>{baseline}</p>
+            </div>
+
+            <hr
+              class='mx-3 border-0 border-t border-neutral-950/10'
+              data-zone='separator'
+            />
+
+            <section
+              class='invisible grid grid-cols-12 gap-3 px-3 noscript:visible'
+              data-page-section='HeroInfo'>
+              <h2 class='sr-only'>Informations</h2>
+              <div class='col-span-6 gap-3'>
+                <List>
+                  <h3 slot='title'>Focused in</h3>
+                  <ListItem>Startups</ListItem>
+                  <ListItem>Tech companies</ListItem>
+                  <ListItem>Design Studios</ListItem>
+                  <ListItem>Advertising Agencies</ListItem>
+                </List>
+              </div>
+              <div class='col-span-6 gap-3'>
+                <List>
+                  <h3 slot='title'>Specialized in</h3>
+                  <ListItem>Software engineering</ListItem>
+                  <ListItem>UX/UI design</ListItem>
+                  <ListItem>Accessibility</ListItem>
+                  <ListItem>Performances</ListItem>
+                </List>
+              </div>
+            </section>
           </div>
-          <p class='sr-only'>{heading}</p>
-          <div
-            class='text-md animate-text invisible px-[8.333%] pr-3 will-change-contents noscript:visible'
-            data-zone='section'
-            aria-hidden='true'
-            data-animation='split-text-blurred'>
-            {baseline}
-          </div>
-          <p class='sr-only'>{baseline}</p>
         </div>
-        <hr
-          class='border-accent-950/10 border-0 border-t'
-          data-zone='separator'
-        />
-        <section class='grid grid-cols-12 flex-col-reverse gap-3'>
-          <h2 class='sr-only'>Informations</h2>
-          <div class='col-span-8 flex flex-col gap-3'>
-            <h3
-              class='invisible font-sans text-xs font-medium uppercase noscript:visible'
-              data-animation='split-text-blurred'
-              data-zone='section'>
-              Services
-            </h3>
-            <ul
-              class='invisible flex flex-col font-sans text-sm noscript:visible'
-              data-zone='section'>
-              <li>
-                <a
-                  class='pointer-events-auto block py-1'
-                  href='mailto:hello@guillaumecatel.com'
-                  target='_blank'
-                  rel='noopener noreferrer'>
-                  <span data-animation='split-text-blurred'>
-                    hello@guillaumecatel.com
-                  </span>
-                  <span class='sr-only'>hello@guillaumecatel.com</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div
-            class='invisible col-span-4 flex flex-col gap-3 noscript:visible'
-            data-zone='section'>
-            <h3
-              class='font-sans text-xs font-medium uppercase'
-              data-animation='split-text-blurred'
-              data-zone='section'>
-              Social
-            </h3>
-            <ul class='flex flex-col font-sans text-sm' data-zone='section'>
-              {
-                socialLinks.map((link) => (
-                  <li>
-                    <a
-                      class='pointer-events-auto block py-1'
-                      href={link.url}
-                      target='_blank'
-                      rel='noopener noreferrer'>
-                      <span data-animation='split-text-blurred'>
-                        {link.name}
-                      </span>
-                      <span class='sr-only'>{link.name}</span>
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        </section>
+        <div
+          class='relative flex flex-col gap-16 px-1.5 py-12 pb-[var(--layout-safe-area-inset-end)]'
+          data-page-section='Showcase'>
+          {
+            showcaseItems.map((item, i) => (
+              <Card
+                class='min-h-[33vh]'
+                data-page-section='ShowcaseItem'
+                data-lag={i * 0.25}
+                wip={item.wip}
+                liveUrl={item.liveUrl}>
+                <Video
+                  poster={item.poster.src}
+                  src={item.video}
+                  class='size-full object-cover'
+                  slot='thumbnail'
+                />
+                <h3 slot='title'>{item.title}</h3>
+                <div slot='description'>{item.description}</div>
+              </Card>
+            ))
+          }
+        </div>
       </div>
     </div>
+
     <script>
-      import { gsap, SplitText } from '@/utils/gsap'
+      import { useIndexPageAnimations } from '@/hooks/astro/useIndexPageAnimations'
 
-      document.addEventListener('DOMContentLoaded', async () => {
-        const indexPage = document.querySelector(
-          '[data-component="Index"]',
-        ) as HTMLElement
-
-        const pinned = document.querySelector(
-          '[data-zone="pinned"]',
-        ) as HTMLElement
-
-        const sections = indexPage.querySelectorAll(
-          '[data-zone="section"]',
-        ) as NodeListOf<HTMLElement>
-
-        const separators = indexPage.querySelectorAll(
-          '[data-zone="separator"]',
-        ) as NodeListOf<HTMLElement>
-
-        const footer = document.querySelector(
-          '[data-component="Footer"]',
-        ) as HTMLElement
-
-        const splitTextBlurred = document.querySelectorAll(
-          '[data-animation="split-text-blurred"]',
-        ) as NodeListOf<HTMLElement>
-
-        await document.fonts.ready
-
-        const splitTextBlurredSplitted = new SplitText(splitTextBlurred, {
-          aria: 'hidden',
-          type: 'words',
-          tag: 'span',
-        })
-
-        const splitTextBlurredChars = splitTextBlurredSplitted.words
-
-        const tl = gsap.timeline()
-
-        tl.from(sections, {
-          translateY: '50%',
-          opacity: 0,
-          duration: 0.4,
-          autoAlpha: 0,
-          ease: 'power2.out',
-          stagger: 0.2,
-          //filter: 'blur(4px)',
-          delay: 0.6,
-        })
-          .from(
-            splitTextBlurredChars,
-            {
-              opacity: 0.1,
-              duration: 0.7,
-              //filter: 'blur(4px)',
-              stagger: 0.02,
-
-              ease: 'power2.out',
-            },
-            '<',
-          )
-          .from(
-            separators,
-            {
-              translateX: '100%',
-              duration: 0.8,
-              ease: 'power2.out',
-              stagger: 0.2,
-            },
-            '<+1.2',
-          )
-
-        gsap.to(pinned, {
-          scrollTrigger: {
-            trigger: footer,
-            start: 'top bottom',
-            scroller: '[data-component="Wrapper"]',
-            end: 'center top',
-            scrub: true,
-          },
-          y: '-8.33%',
-          filter: 'blur(4px)',
-          opacity: 0.5,
-          autoAlpha: 0,
-          duration: 1,
-          ease: 'power2.out',
-        })
-      })
+      useIndexPageAnimations()
     </script>
   </Fragment>
 </Layout>

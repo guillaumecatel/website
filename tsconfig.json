@@ -5,8 +5,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "~/*": ["./*"]
     },
-    "types": ["astro/client", "vite-plugin-glsl/ext"]
+    "types": ["astro/client"]
   }
 }
