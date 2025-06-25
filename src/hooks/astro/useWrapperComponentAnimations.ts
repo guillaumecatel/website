@@ -52,6 +52,7 @@ function create() {
       { selector: '[data-component="Header"]', multiple: false },
       { selector: '[data-component="Footer"]', multiple: false },
       { selector: '[data-component="Content"]', multiple: false },
+      { selector: '[data-component="Background"]', multiple: false },
     )
     const [wrapper, header, footer] = selectors
 

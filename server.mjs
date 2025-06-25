@@ -47,6 +47,7 @@ app.use(
           "'self'",
           'analytics.guillaumecatel.com',
           "'unsafe-inline'",
+          'data:',
         ],
         imgSrc: ["'self'", 'data:', 'blob:', 'analytics.guillaumecatel.com'],
         connectSrc: ["'self'", 'analytics.guillaumecatel.com'],

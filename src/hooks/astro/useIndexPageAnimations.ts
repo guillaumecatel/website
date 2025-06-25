@@ -67,7 +67,7 @@ function create() {
       showcaseItems,
     ] = selectors
 
-    ctx = gsap.context(() => {
+    ctx = gsap.context(async () => {
       ScrollSmoother.create({
         content: index,
         smooth: 1,
@@ -75,6 +75,8 @@ function create() {
         normalizeScroll: true,
         smoothTouch: true,
       })
+
+      await document.fonts.ready
 
       const heroHeadingSplit = SplitText.create(heroHeading)
       const heroBaselineSplit = SplitText.create(heroBaseline)
