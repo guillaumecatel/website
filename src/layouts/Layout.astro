@@ -23,9 +23,9 @@ import Wrapper from '@/components/astro/Wrapper.astro'
           <slot name='body' />
         </Content>
         <Footer />
+        <Background />
       </Wrapper>
       <Cursor server:defer transition:persist />
-      <Background server:defer transition:persist='background' />
     </Body>
   </Html>
 </Document>
