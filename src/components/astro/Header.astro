@@ -1,0 +1,16 @@
+---
+import Logo from './Logo.astro'
+---
+
+<header
+  class='pointer-events-none fixed top-0 right-0 left-0 z-50 flex h-[var(--layout-safe-area-inset-start)] flex-col justify-center'
+  data-component='Header'>
+  <div class='grid w-full max-w-120 grid-cols-12 px-3 md:mx-auto'>
+    <div class='text-accent-950 col-span-2 flex items-center justify-start'>
+      <a href='/'>
+        <Logo />
+        <span class='sr-only'>Go to homepage</span>
+      </a>
+    </div>
+  </div>
+</header>

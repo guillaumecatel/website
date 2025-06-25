@@ -1,0 +1,29 @@
+---
+import { Font } from 'astro:assets'
+import { ClientRouter } from 'astro:transitions'
+
+import Analytics from './Analytics.astro'
+import Pwa from './Pwa.astro'
+
+const isProd = import.meta.env.PROD
+---
+
+<head data-component='Head'>
+  <meta charset='utf-8' />
+  <meta
+    name='viewport'
+    content='width=device-width, initial-scale=1, viewport-fit=cover'
+  />
+  <slot />
+  <link
+    rel='icon'
+    type='image/png'
+    href='/icons/favicon-96x96.png'
+    sizes='96x96'
+  />
+  <link rel='icon' type='image/svg+xml' href='/icons/favicon.svg' />
+  <Font cssVariable='--font-sans' />
+  <Pwa />
+  <ClientRouter />
+  {isProd && <Analytics />}
+</head>

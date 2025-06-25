@@ -1,0 +1,57 @@
+---
+import { setTitle } from '@/utils/shared/document'
+import { getImage } from 'astro:assets'
+
+import openGraphDefaultBanner from '@/assets/images/opengraph-banner.png'
+
+export interface Props {
+  title?: string
+  description?: string
+  url?: string
+  image?: string
+  type?: string
+  twitterHandle?: string
+  jsonLd?: Record<string, unknown>
+}
+
+const {
+  title,
+  description,
+  image,
+  type = 'website',
+  twitterHandle = '@votreTwitter',
+  jsonLd,
+} = Astro.props
+
+const siteTitle = setTitle({ pageTitle: title })
+const canonicalUrl = Astro.site!
+const jsonLdToString = JSON.stringify(jsonLd, null, 2)
+
+const defaultOpenGraphImage =
+  image ||
+  (await getImage({
+    src: openGraphDefaultBanner,
+    width: 1200,
+    height: 630,
+    format: 'avif',
+  }).then((image) => image.src))
+---
+
+<title>{siteTitle}</title>
+<meta name='description' content={description} />
+<link rel='canonical' href={canonicalUrl.href} />
+<meta property='og:title' content={siteTitle} />
+<meta property='og:description' content={description} />
+<meta property='og:type' content={type} />
+<meta property='og:url' content={canonicalUrl.href} />
+<meta property='og:image' content={defaultOpenGraphImage} />
+<meta name='twitter:card' content='summary_large_image' />
+<meta name='twitter:title' content={siteTitle} />
+<meta name='twitter:description' content={description} />
+<meta name='twitter:image' content={defaultOpenGraphImage} />
+<meta name='twitter:site' content={twitterHandle} />
+{
+  jsonLdToString && (
+    <script type='application/ld+json' set:html={JSON.stringify(jsonLd)} />
+  )
+}

@@ -16,5 +16,12 @@
     "typescript",
     "typescriptreact"
   ],
-  "prettier.documentSelectors": ["**/*.svg", "**/*.astro"]
+  "prettier.documentSelectors": ["**/*.svg", "**/*.astro", "**/*.sp"],
+  "files.associations": {
+    "*.sp": "javascript"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
 }
