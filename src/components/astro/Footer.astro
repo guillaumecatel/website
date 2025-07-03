@@ -6,7 +6,7 @@ import Button from './form/Button.astro'
 ---
 
 <footer
-  class='pointer-events-none fixed inset-x-0 bottom-0 flex h-[var(--layout-safe-area-inset-end)] flex-col justify-center'
+  class='pointer-events-none invisible fixed inset-x-0 bottom-0 flex h-[var(--layout-safe-area-inset-end)] flex-col justify-center noscript:visible'
   data-component='Footer'>
   <div class='mx-auto grid w-full max-w-120 px-3'>
     <Button as='a' href='mailto:hello@guillaumecatel.com'>

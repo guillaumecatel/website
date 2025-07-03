@@ -33,7 +33,7 @@ const defaultOpenGraphImage =
     src: openGraphDefaultBanner,
     width: 1200,
     height: 630,
-    format: 'avif',
+    format: 'jpg',
   }).then((image) => image.src))
 ---
 
@@ -52,6 +52,10 @@ const defaultOpenGraphImage =
 <meta name='twitter:site' content={twitterHandle} />
 {
   jsonLdToString && (
-    <script type='application/ld+json' set:html={JSON.stringify(jsonLd)} />
+    <script
+      type='application/ld+json'
+      is:inline
+      set:html={JSON.stringify(jsonLd)}
+    />
   )
 }

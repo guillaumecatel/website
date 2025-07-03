@@ -51,6 +51,7 @@ function create() {
       { selector: '[data-page="Index"]', multiple: false },
       { selector: '[data-page-section="HeroInner"]', multiple: false },
       { selector: '[data-page-section="HeroHeading"]', multiple: false },
+      { selector: '[data-page-section="HeroSeparator"]', multiple: false },
       { selector: '[data-page-section="HeroBaseline"]', multiple: false },
       { selector: '[data-page-section="HeroInfo"]', multiple: false },
       { selector: '[data-page-section="Showcase"]', multiple: false },
@@ -61,6 +62,7 @@ function create() {
       index,
       heroInner,
       heroHeading,
+      heroSeparator,
       heroBaseline,
       heroInfo,
       showcase,
@@ -78,8 +80,14 @@ function create() {
 
       await document.fonts.ready
 
-      const heroHeadingSplit = SplitText.create(heroHeading)
-      const heroBaselineSplit = SplitText.create(heroBaseline)
+      const splitTextConfig: SplitText.Vars = {
+        type: 'chars,words,lines',
+        aria: 'none',
+        tag: 'span',
+      }
+
+      const heroHeadingSplit = SplitText.create(heroHeading, splitTextConfig)
+      const heroBaselineSplit = SplitText.create(heroBaseline, splitTextConfig)
 
       timeline = gsap.timeline()
 
@@ -97,14 +105,17 @@ function create() {
           'start',
         )
 
-        .from([heroHeadingSplit.words, heroBaselineSplit.lines], {
-          y: '16px',
-          filter: 'blur(4px)',
-          opacity: 0,
-          autoAlpha: 0,
-          stagger: 0.05,
-          duration: 0.5,
-        })
+        .from(
+          [heroHeadingSplit.words, heroSeparator, heroBaselineSplit.lines],
+          {
+            y: '16px',
+            filter: 'blur(4px)',
+            opacity: 0,
+            autoAlpha: 0,
+            stagger: 0.05,
+            duration: 0.25,
+          },
+        )
 
         .fromTo(
           heroInfo,

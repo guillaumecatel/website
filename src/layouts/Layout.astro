@@ -23,8 +23,8 @@ import Wrapper from '@/components/astro/Wrapper.astro'
           <slot name='body' />
         </Content>
         <Footer />
-        <Background />
       </Wrapper>
+      <Background server:defer />
       <Cursor server:defer transition:persist />
     </Body>
   </Html>
