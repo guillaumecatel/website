@@ -16,7 +16,7 @@
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "compression": "^1.8.0",
-    "express": "^5.1.0",
+    "express": "^5.2.0",
     "gsap": "^3.13.0",
     "helmet": "^8.1.0",
     "nodemailer": "^7.0.3",
